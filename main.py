@@ -17,6 +17,3 @@ async def get_tasks(request: Request):
         return {"sorted": res, "not sorted": tasks_temp_by_build}
     else:
         return {"error": "Error in getting tasks"}
-
-
-

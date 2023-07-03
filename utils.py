@@ -1,7 +1,8 @@
 from yaml_reader import builds, tasks
 
 
-def get_sorted_tasks_by_build(build_name):
+# This method is used to get the sorted tasks by build
+def get_sorted_tasks_by_build(build_name: str) -> tuple:
     try:
         tasks_temp_by_build = next((build['tasks'] for build in builds if build['name'] == build_name), [])
         res = [{tasks_name: search_dependency(tasks_name)} for tasks_name in tasks_temp_by_build]
@@ -11,7 +12,8 @@ def get_sorted_tasks_by_build(build_name):
         return [], [], False
 
 
-def search_dependency(task_name):
+# This method recursively searches for dependencies and returns a list of these dependencies
+def search_dependency(task_name: str) -> list:
     task_temp = []
     for task in tasks:
         if task['name'] == task_name:
@@ -24,7 +26,8 @@ def search_dependency(task_name):
     return task_temp
 
 
-def count_recursive_iterations(lst):
+# This method recursively counts the number of attachments
+def count_recursive_iterations(lst) -> int:
     count = 0
     for item in lst:
         if isinstance(item, list) or isinstance(item, dict):
@@ -34,11 +37,13 @@ def count_recursive_iterations(lst):
     return count
 
 
-def sort_by_recursive_iterations(lst):
+# This method sorts the tasks by the number of recursive iterations
+def sort_by_recursive_iterations(lst: list) -> list:
     return sorted(lst, key=lambda x: count_recursive_iterations(x))
 
 
-def unpacker(task):
+# This method unpacks the keys of the dictionary
+def unpacker(task: list) -> list:
     keys = []
     for item in task:
         for key in item:

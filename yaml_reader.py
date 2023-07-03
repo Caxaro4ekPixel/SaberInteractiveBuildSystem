@@ -4,12 +4,14 @@ import os.path
 builds_path = "builds/builds.yaml"
 tasks_path = "builds/tasks.yaml"
 
+# Checks for files in the directory
 if not os.path.isfile(builds_path):
     raise FileNotFoundError("builds.yaml not found")
 
 if not os.path.isfile(tasks_path):
     raise FileNotFoundError("tasks.yaml not found")
 
+# Reads the files
 with open(builds_path, 'r') as f:
     builds = yaml.safe_load(f)['builds']
 

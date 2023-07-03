@@ -6,6 +6,14 @@ app = FastAPI()
 
 @app.post("/get_tasks/")
 async def get_tasks(request: Request):
+    """
+        Get sorted tasks by build
+        .. example::
+           $ curl http://<address>/get_tasks -X POST
+             -d '{
+                    "build": "<build name>",
+                }'
+    """
     request_body = await request.json()
     if not request_body:
         return {"error": "No fields"}
